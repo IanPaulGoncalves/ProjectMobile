@@ -1,8 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { View, Text } from "react-native";
 import MapView from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
 import config from "../../config/config.json";
+import { useSelector, useDispatch } from "react-redux";
 
 function Maps(props: any) {
   const mapEL = useRef(null);
@@ -22,6 +23,13 @@ function Maps(props: any) {
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   };
+
+  const stateSearchMap = useSelector((state) => state.searchMap);
+
+  useEffect(() => {
+    console.log(stateSearchMap);
+    
+  },[stateSearchMap])
 
   return (
     <View

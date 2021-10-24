@@ -5,6 +5,10 @@ import { styles } from "./style";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import config from "../../config/config.json";
 
+import { useDispatch } from "react-redux";
+
+import { setSearch } from "../../store/SearchMap/SearchMap.actions";
+
 function Search(props: any) {
   const [showState, setState] = useState({
     origin: {
@@ -17,6 +21,8 @@ function Search(props: any) {
     },
     priceKm: "",
   });
+
+  const searchMapDispatch = useDispatch();
 
   function setValueState(name: string, value: any) {
     setState((state) => ({
@@ -65,7 +71,7 @@ function Search(props: any) {
                 }}
                 query={{
                   key: config.API_KEY,
-                  language: "pt-br",
+                  language: "pt-BR",
                 }}
                 enablePoweredByContainer={false}
                 fetchDetails
@@ -121,7 +127,7 @@ function Search(props: any) {
                 }}
                 query={{
                   key: config.API_KEY,
-                  language: "pt",
+                  language: "pt-BR",
                 }}
                 enablePoweredByContainer={false}
                 fetchDetails
@@ -187,6 +193,9 @@ function Search(props: any) {
                       price: showState.priceKm,
                     },
                   });
+                  searchMapDispatch(
+                    setSearch(showState.origin, showState.destiny)
+                  );
                 } else {
                   console.log("opa");
                 }
